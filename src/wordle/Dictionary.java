@@ -7,7 +7,10 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.File;
 /**
- * Dictionary Class *insert description here*
+ * Reads a file and creates a List of English Words and common words. 
+ * Boolean checks which are valid user guesses and target Wordle game words.
+ * Conditions for a valid user guess: 5 letters and found in the list of English words
+ * Conditions for a valid target word: 5 letters and found in the list of common words
  * 
  * @author Linda Hu
  * Sources used: previous programming assignments, 
@@ -28,8 +31,8 @@ public class Dictionary {
 	static List<String> validWordleGuesses = new ArrayList<>();
 	
 	/**
-	 *  Read the words from the files and create new lists to hold each one
-	 * @param args name of files containing word data
+	 * Main method. Reads the files, creates Lists, and checks word validity.
+	 * @param args name of the files containing word data
 	 * @return List of words in filename
 	 */
 	public static List<String> readFiles (String filename) {
@@ -53,6 +56,8 @@ public class Dictionary {
 	
 	/**
 	 * Reads files and creates valid Wordle lists of playable words and valid guesses.
+	 * Checks if a randomly selected word form EnglishWords.txt is a valid user guess,
+	 * and if it is a valid target word for Game to use.
 	 * @param args filename to be read
 	 * @return List of playable words and valid guesses.
 	 */
@@ -136,7 +141,5 @@ public class Dictionary {
 		}
 		return false;
 	}
-	
-	
 }
 	
