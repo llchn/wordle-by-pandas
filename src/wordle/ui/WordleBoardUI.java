@@ -2,10 +2,28 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
 import javax.swing.JComponent;
+
+/**
+ * !!!insert some description later
+ * 
+ * @author Lily Tran 
+ * 
+ * Sources used: 
+ * Java8 Oracle docs relating to Swing Graphics
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JLabel.html
+ * https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html
+ * https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
+ * 
+ * Computer graphics facts relating to x-y coordinates https://math.hws.edu/eck/cs124/
+ * javanotes5/c6/s3.html#:~:text=A%20graphics%20context%20draws%20in,the%20grid%20lines
+ * %20between%20them.)
+ */
 
 public class WordleBoardUI extends JComponent { 
     // size information used in drawing the wordle board, in pixels
@@ -42,6 +60,12 @@ public class WordleBoardUI extends JComponent {
                 cellColors[r][c] = Color.white;  
             }
         }
+        // dummy test to see how letters will appear, *delete later
+        cellLetters[0][0] = 'D'; 
+        cellLetters[0][1] = 'O'; 
+        cellLetters[0][2] = 'N'; 
+        cellLetters[0][3] = 'U'; 
+        cellLetters[0][4] = 'T'; 
         this.setPreferredSize(new Dimension(COMPONENT_WIDTH, COMPONENT_HEIGHT));          
     }
     
@@ -60,8 +84,22 @@ public class WordleBoardUI extends JComponent {
             for (int c=0; c<COLS; c++) {
                 int leftMargin = START_LEFT + (c * (CELL_SIZE + CELL_GAP));
                 int topMargin = START_TOP + (r * (CELL_SIZE + CELL_GAP));
+                
+                //drawing the box first to avoid contradicting colors (cell's vs letter's colors)
                 g.setColor(CELL_COLOR);
                 g.fillRect(leftMargin, topMargin, CELL_SIZE, CELL_SIZE);
+                if (cellLetters[r][c]!=' ') {
+                    
+                    g.setFont(new Font("Helvetica", Font.BOLD, 15));   
+                    g.setColor(Color.black);
+                    
+                    FontMetrics metrics = g.getFontMetrics(); 
+                    int letterWdth = metrics.stringWidth(String.valueOf(cellLetters[r][c]));
+                    int letterHgt = metrics.getHeight(); 
+                    int widthOffset = (CELL_SIZE - letterWdth)/2;
+                    int hgtOffset = (CELL_SIZE-letterHgt)/2 + letterHgt; 
+                    g.drawString(String.valueOf(cellLetters[r][c]), leftMargin + widthOffset, topMargin+hgtOffset); 
+                }               
             }
         }     
     } 
