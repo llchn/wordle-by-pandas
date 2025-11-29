@@ -5,12 +5,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Polygon;
 
 import javax.swing.JComponent;
 
 /**
- * !!!insert some description later
+ * displays the grid containing six 5-letter word guesses
  * 
  * @author Lily Tran 
  * 
@@ -48,6 +47,9 @@ public class WordleBoardUI extends JComponent {
     private char[][] cellLetters;
     private Color[][] cellColors;
     
+    /**
+     * Constructor 
+     */
     public WordleBoardUI() {
         // data info of what's inside each box (letter, specific colors)
         cellLetters = new char[ROWS][COLS];
@@ -93,6 +95,7 @@ public class WordleBoardUI extends JComponent {
                     g.setFont(new Font("Helvetica", Font.BOLD, 15));   
                     g.setColor(Color.black);
                     
+                    //get specifics metrics of each letter in order to scale it exactly in the middle of box
                     FontMetrics metrics = g.getFontMetrics(); 
                     int letterWdth = metrics.stringWidth(String.valueOf(cellLetters[r][c]));
                     int letterHgt = metrics.getHeight(); 

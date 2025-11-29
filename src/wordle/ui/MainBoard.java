@@ -2,31 +2,25 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import example.graphics.Drawing;
-
+/**
+ * Displays wordle grid of 6 guesses, keyboard, input box
+ */
 public class MainBoard extends JPanel {
-//    JPanel bottomPanel;
-//    JTextField textInputBox; 
-//    JLabel textBoxLabel; 
+    /**
+     * Creates the window and puts the graphics inside (wordle grid, input box)
+     */
     public MainBoard(){ 
-        // Create the window and set the window close action
+        // create the window and set the window close action
         // to also exit the program.
-        JFrame f = new JFrame();
+        JFrame f = new JFrame("Wordle by Pandas");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        // Create the panel to place the Wordle Board component on
+        // Create the panel to place the Wordle board component on
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         
