@@ -15,6 +15,7 @@ import java.io.File;
  * @author Linda Hu
  * Sources used: previous programming assignments, 
  * https://www.geeksforgeeks.org/java/generating-random-numbers-in-java
+ * 
  */
 public class Dictionary {
 	
