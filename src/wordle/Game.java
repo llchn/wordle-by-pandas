@@ -104,6 +104,11 @@ public class Game {
             
             // Error message "Too short" if fewer than 5 letters 
             // Error message "Too long" if more than 5 letters 
+            // if user has won, no longer accept user input
+            if (correctGuess == userGuess) {
+                // popup with message that they won
+                // end game
+            }
             // if valid
             if (Dictionary.isValidGuess(userGuess)) {
                 // update colors accordingly
