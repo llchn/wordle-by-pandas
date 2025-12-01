@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+// test branch
 
 /**
  * Displays wordle grid of 6 guesses, keyboard, input box
@@ -56,11 +57,7 @@ public class MainBoard extends JPanel {
     }
     public String getUserInput() {
         return textInputBox.getText(); 
-        
-        
     }
-    
-
     /**
      * Runs the graphic UI of the whole game
      * @param args None
