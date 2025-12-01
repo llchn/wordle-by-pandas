@@ -1,5 +1,6 @@
 package wordle;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,20 +29,20 @@ public class Game {
     private static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
     
     // HashMap to store letter and correct position
-    private static HashMap<Character, Integer> correctPositionForLetter = new HashMap<>(5);
+    private static HashMap<Character, Color> correctPositionForLetter = new HashMap<>(5);
     
     /**
      * Takes the 5-letter correctGuess and stores its letter and position
      * @return map with correct letter and position correlations
      */
-    public HashMap absenceKnown() {
-        int currentLocation = 1;
-        for (char c : correctGuess) {
-            correctPositionForLetter.put(currentLocation, c);
-            currentLocation++;
-        }
-        return correctPositionForLetter;
-    }
+//    public HashMap absenceKnown() {
+//        int currentLocation = 1;
+//        for (char c : correctGuess.toCharArray()) {
+//            correctPositionForLetter.put(currentLocation, c);
+//            currentLocation++;
+//        }
+//        return correctPositionForLetter;
+//    }
     
     /**
      * Checks a letter to see if absence is known and colors keyboard and mainboard accordingly
@@ -101,7 +102,9 @@ public class Game {
     public static void main (String[] args) {
         // if user presses return
             // Error message "Not in word list" if word is not in dictionary
-            
+            if (!Dictionary.isValidGuess(userGuess)) {
+                // popup error message "Not in word list"
+            }
             // Error message "Too short" if fewer than 5 letters 
             // Error message "Too long" if more than 5 letters 
             // if user has won, no longer accept user input
@@ -112,7 +115,7 @@ public class Game {
             // if valid
             if (Dictionary.isValidGuess(userGuess)) {
                 // update colors accordingly
-                for (char l : userGuess) {
+                for (char l : userGuess.toCharArray()) {
                     if (presenceKnown(l) && letterLocationKnown(l)){
                         // set square to green
                         // set keyboard to green
