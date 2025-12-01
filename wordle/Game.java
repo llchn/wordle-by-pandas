@@ -13,22 +13,22 @@ import java.util.Map;
 public class Game {
     
     // String that stores correct guess
-    String correctGuess = Dictionary.getWord();
+    static String correctGuess = Dictionary.getWord();
     
  // String that stores user's current guess
-    String userGuess = "";
+    static String userGuess = "";
     
     // String to store all possible input values
-    String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     
     // String to store remaining letters that are correct
-    String existingLetters = "abcdefghijklmnopqrstuvwxyz";
+    static String existingLetters = "abcdefghijklmnopqrstuvwxyz";
     
     // String to store remaining letters that have not been tried
-    String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
+    static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
     
     // HashMap to store letter and correct position
-    HashMap<Char, Integer> correctPositionForLetter = new HashMap<>(5);
+    static HashMap<Char, Integer> correctPositionForLetter = new HashMap<>(5);
     
     /**
      * Takes the 5-letter correctGuess and stores its letter and position
@@ -96,10 +96,15 @@ public class Game {
     }
 
     /**
-     * 
+     * Play game.
      */
     public static void main (String[] args) {
         // if user presses return
+            // Error message "Not in word list" if word is not in dictionary
+            
+            // Error message "Too short" if fewer than 5 letters 
+            // Error message "Too long" if more than 5 letters 
+            // if valid
             if (Dictionary.isValidGuess(userGuess)) {
                 // update colors accordingly
                 for (letter l : userGuess) {
