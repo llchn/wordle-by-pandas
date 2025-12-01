@@ -13,22 +13,22 @@ import java.util.Map;
 public class Game {
     
     // String that stores correct guess
-    static String correctGuess = Dictionary.getValidTarget();
+    private static String correctGuess = Dictionary.getValidTarget();
     
  // String that stores user's current guess
-    static String userGuess = "";
+    private static String userGuess = "";
     
     // String to store all possible input values
-    static String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     
     // String to store remaining letters that are correct
-    static String existingLetters = "abcdefghijklmnopqrstuvwxyz";
+    private static String existingLetters = "abcdefghijklmnopqrstuvwxyz";
     
     // String to store remaining letters that have not been tried
-    static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
+    private static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
     
     // HashMap to store letter and correct position
-    static HashMap<Character, Integer> correctPositionForLetter = new HashMap<>(5);
+    private static HashMap<Character, Integer> correctPositionForLetter = new HashMap<>(5);
     
     /**
      * Takes the 5-letter correctGuess and stores its letter and position
@@ -48,7 +48,7 @@ public class Game {
      * @param letter to be checked
      * @return true if absence known
      */
-    public boolean absenceKnown(char letter) {
+    public static boolean absenceKnown(char letter) {
         // if letter exists in existingLetters, then the absence is not known
         if (existingLetters.indexOf(letter) > 0) {
             return false;
@@ -62,7 +62,7 @@ public class Game {
      * @param letter to be checked
      * @return true if absence known
      */
-    public boolean presenceKnown(char letter) {
+    public static boolean presenceKnown(char letter) {
         // if letter exists in existingLetters, then presenceKnown
         if (existingLetters.indexOf(letter) > 0) {
             return true;
@@ -90,7 +90,7 @@ public class Game {
      * @param letter to be checked
      * @return true if letter has not been tried
      */
-    public boolean letterLocationKnown(char letter) {
+    public static boolean letterLocationKnown(char letter) {
         //to be filled
         return false;
     }
@@ -108,13 +108,13 @@ public class Game {
             if (Dictionary.isValidGuess(userGuess)) {
                 // update colors accordingly
                 for (char l : userGuess) {
-                    if (presenceKnown() && letterLocationKnown()){
+                    if (presenceKnown(l) && letterLocationKnown(l)){
                         // set square to green
                         // set keyboard to green
-                    } else if (absenceKnown()) {
+                    } else if (absenceKnown(l)) {
                         // set square to dark gray
                         // set keyboard to dark gray
-                    } else if (presenceKnown()) {
+                    } else if (presenceKnown(l)) {
                         // set square to yellow
                         // set keyboard to yellow
                     }
