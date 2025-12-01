@@ -3,8 +3,6 @@ package wordle;
 import java.util.HashMap;
 import java.util.Map;
 
-import wordle.ui.MainBoard;
-
 /**
  * 
  * 
@@ -31,9 +29,6 @@ public class Game {
     
     // HashMap to store letter and correct position
     private static HashMap<Character, Integer> correctPositionForLetter = new HashMap<>(5);
-    
-    private MainBoard mainboard;
-   
     
     /**
      * Takes the 5-letter correctGuess and stores its letter and position
@@ -106,7 +101,7 @@ public class Game {
     public static void main (String[] args) {
         // if user presses return
             // Error message "Not in word list" if word is not in dictionary
-
+            
             // Error message "Too short" if fewer than 5 letters 
             // Error message "Too long" if more than 5 letters 
             // if valid
@@ -133,4 +128,3 @@ public class Game {
    
   
 }
-    
