@@ -9,11 +9,14 @@ import javax.swing.JTextField;
 
 /**
  * Displays wordle grid of 6 guesses, keyboard, input box
+ * 
+ * @author Lily Tran
  */
 public class MainBoard extends JPanel {
     /**
      * Creates the window and puts the graphics inside (wordle grid, input box)
      */
+    private JTextField textInputBox; 
     public MainBoard(){ 
         // create the window and set the window close action
         // to also exit the program.
@@ -27,7 +30,7 @@ public class MainBoard extends JPanel {
         //Create the bottom panel to place the input text box
         JPanel bottomPanel = new JPanel();
         JLabel textBoxLabel = new JLabel("Your guess:");
-        JTextField textInputBox = new JTextField(10);
+        textInputBox = new JTextField(10);
         
         bottomPanel.add(textBoxLabel); 
         bottomPanel.add(textInputBox);
@@ -51,6 +54,13 @@ public class MainBoard extends JPanel {
         f.setVisible(true);
 
     }
+    public String getUserInput() {
+        return textInputBox.getText(); 
+        
+        
+    }
+    
+
     /**
      * Runs the graphic UI of the whole game
      * @param args None
