@@ -13,7 +13,7 @@ import java.util.Map;
 public class Game {
     
     // String that stores correct guess
-    static String correctGuess = Dictionary.getWord();
+    static String correctGuess = Dictionary.getValidTarget();
     
  // String that stores user's current guess
     static String userGuess = "";
@@ -28,7 +28,7 @@ public class Game {
     static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
     
     // HashMap to store letter and correct position
-    static HashMap<Char, Integer> correctPositionForLetter = new HashMap<>(5);
+    static HashMap<Character, Integer> correctPositionForLetter = new HashMap<>(5);
     
     /**
      * Takes the 5-letter correctGuess and stores its letter and position
@@ -36,7 +36,7 @@ public class Game {
      */
     public HashMap absenceKnown() {
         int currentLocation = 1;
-        for (Char c : correctGuess) {
+        for (char c : correctGuess) {
             correctPositionForLetter.put(currentLocation, c);
             currentLocation++;
         }
@@ -107,7 +107,7 @@ public class Game {
             // if valid
             if (Dictionary.isValidGuess(userGuess)) {
                 // update colors accordingly
-                for (letter l : userGuess) {
+                for (char l : userGuess) {
                     if (presenceKnown() && letterLocationKnown()){
                         // set square to green
                         // set keyboard to green
