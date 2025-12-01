@@ -141,5 +141,19 @@ public class Dictionary {
 		}
 		return false;
 	}
+	
+	/**
+     * @return list of valid Wordle target words
+     */
+    public List<String> getValidTargets() {
+        return validWordleTarget;
+    }
+    
+    /**
+     * @return list of valid Wordle user guesses
+     */
+    public List<String> getValidGuesses() {
+        return validWordleGuesses;
+    }
 }
 	
