@@ -14,7 +14,7 @@ import java.io.File;
  * 
  * @author Linda Hu
  * Sources used: previous programming assignments, 
- * https://www.geeksforgeeks.org/java/generating-random-numbers-in-java,
+ * https://www.geeksforgeeks.org/java/generating-random-numbers-in-java
  */
 public class Dictionary {
 	
@@ -25,13 +25,13 @@ public class Dictionary {
 	static List<String> englishWords = new ArrayList<>();
 	
 	// List to hold all valid game target words in Wordle
-	static List<String> validWordleTarget = new ArrayList<>();
+	static List<String> validWordleTargets = new ArrayList<>();
 	
 	// List to hold all valid user guesses in Wordle
 	static List<String> validWordleGuesses = new ArrayList<>();
 	
 	/**
-	 * Main method. Reads the files, creates Lists, and checks word validity.
+	 * Reads the files, creates Lists, and checks word validity.
 	 * @param args name of the files containing word data
 	 * @return List of words in filename
 	 */
@@ -85,15 +85,25 @@ public class Dictionary {
         englishWords = readFiles(englishWordsFile);
         validWordleGuesses = (get5LetterWords(englishWords));
         
-        // Get a random word from EnglishWords.txt
+	}
+	
+	/**
+	 * Gets a random Wordle target word from EnglishWords.txt
+	 * @return targetWord a random valid Wordle target word
+	 */
+	public static String getValidTarget() {
+		// Check and add all valid target words from EnglishWords.txt to a new list
+		for (String word : englishWords) {
+			if (isValidTarget(word)) {
+				validWordleTargets.add(word);
+			}
+		}
+		
+        // Get a random word from the list of valid targets
         Random random = new Random();
-        int rng = random.nextInt(englishWords.size());
-        String targetWord = englishWords.get(rng);
-        String userGuess = targetWord;
-        
-        System.out.println("isValidGuess: " + userGuess + " is " + (isValidGuess(userGuess)));    
-        System.out.println("isValidTarget: " + targetWord + " is " + isValidTarget(targetWord));
-        
+        int rng = random.nextInt(validWordleTargets.size());
+        String targetWord = validWordleTargets.get(rng);
+        return targetWord;
 	}
 	
 	/**
@@ -142,18 +152,5 @@ public class Dictionary {
 		return false;
 	}
 	
-	/**
-     * @return list of valid Wordle target words
-     */
-    public List<String> getValidTargets() {
-        return validWordleTarget;
-    }
-    
-    /**
-     * @return list of valid Wordle user guesses
-     */
-    public List<String> getValidGuesses() {
-        return validWordleGuesses;
-    }
 }
 	
