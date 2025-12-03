@@ -63,11 +63,11 @@ public class WordleBoardUI extends JComponent {
             }
         }
         // dummy test to see how letters will appear, *delete later
-        cellLetters[0][0] = 'D'; 
-        cellLetters[0][1] = 'O'; 
-        cellLetters[0][2] = 'N'; 
-        cellLetters[0][3] = 'U'; 
-        cellLetters[0][4] = 'T'; 
+//        cellLetters[0][0] = 'D'; 
+//        cellLetters[0][1] = 'O'; 
+//        cellLetters[0][2] = 'N'; 
+//        cellLetters[0][3] = 'U'; 
+//        cellLetters[0][4] = 'T'; 
         this.setPreferredSize(new Dimension(COMPONENT_WIDTH, COMPONENT_HEIGHT));          
     }
     
@@ -105,5 +105,16 @@ public class WordleBoardUI extends JComponent {
                 }               
             }
         }     
-    } 
+    }
+    /**
+     * tell Java to redraw after updating any word data for a row
+     * @param word
+     * @param row
+     */
+    public void updateRow(String word, int row) {
+        for (int i = 0; i<5; i++) {
+            cellLetters[row][i] = word.charAt(i);
+        }
+        repaint();
+    }
 }

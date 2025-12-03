@@ -1,4 +1,4 @@
-package wordle;
+package backend;
 
 import java.awt.Color;
 import java.util.HashMap;
