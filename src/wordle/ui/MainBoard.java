@@ -2,22 +2,33 @@ package wordle.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import backend.Dictionary;
+import javax.swing.JOptionPane; 
+// test branch
 
 /**
  * Displays wordle grid of 6 guesses, keyboard, input box
  * 
+ * Sources: 
+ * Java Swing dialog boxes https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+ * 
  * @author Lily Tran
  */
 public class MainBoard extends JPanel {
+    private JTextField textInputBox; 
+    private WordleBoardUI grid; 
+    private int attemptsMade = 0; 
+    
     /**
      * Creates the window and puts the graphics inside (wordle grid, input box)
      */
-    private JTextField textInputBox; 
     public MainBoard(){ 
+        backend.Dictionary.filesSetUp("common_words.txt", "EnglishWords.txt");
         // create the window and set the window close action
         // to also exit the program.
         JFrame f = new JFrame("Wordle by Pandas");
@@ -35,10 +46,50 @@ public class MainBoard extends JPanel {
         bottomPanel.add(textBoxLabel); 
         bottomPanel.add(textInputBox);
         
-        // create the wordle board component, place it into the panel
-        WordleBoardUI cell = new WordleBoardUI();
+        String targetWord = Dictionary.getValidTarget();
+        System.out.println(targetWord);
+          
+        //error messages if errors are detected from input responses 
+        textInputBox.addActionListener(event-> {
+            String userGuess = getUserInput().toLowerCase();
+            
+            if (getUserInput().length()<5) {
+                JOptionPane.showMessageDialog(f, "Too short!");
+                return; 
+            }
+            if (getUserInput().length()>5) {
+                JOptionPane.showMessageDialog(f, "Too long!");
+                return;
+            }
+            if (!Dictionary.validWordleGuesses.contains(getUserInput())) {
+                JOptionPane.showMessageDialog(f, "Not in word list.");
+                return; 
+            }
+            if (attemptsMade<5) {
+                grid.updateRow(userGuess, attemptsMade);
+                if (userGuess.equals(targetWord)) {
+                    JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
+                }
+                attemptsMade++; 
+                setEmptyInputBox();
+            } else {
+                if (!userGuess.equals(targetWord)) {
+                    grid.updateRow(userGuess, attemptsMade);
+                    JOptionPane.showMessageDialog(f, "Game over. Correct word: " + targetWord);
+                }
+                else {
+                    grid.updateRow(userGuess, attemptsMade);
+                    JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
+                }
+                
+            }
+        });
+      
         
-        p.add(cell);
+        // create the wordle board component, place it into the panel
+        grid = new WordleBoardUI();
+        
+        p.add(grid);
 
         // add the wordle panel to the window and set the size of the window
         f.add(p, BorderLayout.CENTER);
@@ -54,13 +105,22 @@ public class MainBoard extends JPanel {
         f.setVisible(true);
 
     }
+    /**
+     * Gets the word that the user enters inside the box
+     * 
+     * @return the word that the user just entered in string type 
+     */
     public String getUserInput() {
         return textInputBox.getText(); 
-        
-        
     }
     
-
+    /**
+     * Set the input box back to the empty state
+     */
+    public void setEmptyInputBox() {
+        textInputBox.setText("");
+    }
+    
     /**
      * Runs the graphic UI of the whole game
      * @param args None

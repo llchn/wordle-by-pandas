@@ -1,5 +1,4 @@
-package wordle;
-
+package backend;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,16 +19,16 @@ import java.io.File;
 public class Dictionary {
 	
 	// List to hold the contents of the common_words.txt file
-	static List<String> commonWords = new ArrayList<>();
+	public static List<String> commonWords = new ArrayList<>();
 	
 	// List to hold the contents of the EnglishWords.txt file
-	static List<String> englishWords = new ArrayList<>();
+	public static List<String> englishWords = new ArrayList<>();
 	
 	// List to hold all valid game target words in Wordle
-	static List<String> validWordleTargets = new ArrayList<>();
+	public static List<String> validWordleTargets = new ArrayList<>();
 	
 	// List to hold all valid user guesses in Wordle
-	static List<String> validWordleGuesses = new ArrayList<>();
+	public static List<String> validWordleGuesses = new ArrayList<>();
 	
 	/**
 	 * Reads the files, creates Lists, and checks word validity.
@@ -59,30 +58,14 @@ public class Dictionary {
 	 * Reads files and creates valid Wordle lists of playable words and valid guesses.
 	 * Checks if a randomly selected word form EnglishWords.txt is a valid user guess,
 	 * and if it is a valid target word for Game to use.
-	 * @param args filename to be read
-	 * @return List of playable words and valid guesses.
+	 * @param commonWordsFile, String englishWordsFile filenames to be read
+	 * @return list of playable words and valid guesses.
 	 */
-	public static void main (String[] args) {
+	public static void filesSetUp (String commonWordsFile, String englishWordsFile) {
 		// Reads common_words.txt file and creates list
-		String commonWordsFile;
-        if (args.length == 0) {
-            commonWordsFile = "common_words.txt";
-        }
-        else {
-            commonWordsFile = args[0];
-        }
-        
         commonWords = readFiles(commonWordsFile);
 
-        // Reads EnglishWords.txt file and creates List
-        String englishWordsFile;
-        if (args.length == 0) {
-            englishWordsFile = "EnglishWords.txt";
-        }
-        else {
-            englishWordsFile = args[0];
-        }
-        
+        // Reads EnglishWords.txt file and creates List      
         englishWords = readFiles(englishWordsFile);
         validWordleGuesses = (get5LetterWords(englishWords));
         
@@ -98,8 +81,7 @@ public class Dictionary {
 			if (isValidTarget(word)) {
 				validWordleTargets.add(word);
 			}
-		}
-		
+		}		
         // Get a random word from the list of valid targets
         Random random = new Random();
         int rng = random.nextInt(validWordleTargets.size());
@@ -152,6 +134,34 @@ public class Dictionary {
 		}
 		return false;
 	}
+	
+	/**
+     * Test the Dictionary class
+     * @param args name of the files containing word data
+     */
+    public static void main(String[] args) {
+        String commonFile;
+        if (args.length > 0) {
+            commonFile = args[0];
+        }
+        else {
+            commonFile = "common_words.txt";
+        }
+   
+        String englishFile;
+        if (args.length > 1) {
+            englishFile = args[1];
+        }
+        else {
+            englishFile = "EnglishWords.txt";
+        }
+        
+        // test the setup method
+        filesSetUp(commonFile, englishFile);
+        System.out.println("Dictionary successfully loaded. # of valid words " + validWordleGuesses.size());
+        
+        
+    }
 	
 }
 	
