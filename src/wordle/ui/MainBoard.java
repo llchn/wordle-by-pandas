@@ -69,6 +69,9 @@ public class MainBoard extends JPanel {
                 grid.updateRow(userGuess, attemptsMade);
                 if (userGuess.equals(targetWord)) {
                     JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
+                    // no longer accept user input
+                    textInputBox.setEnabled(false);
+                    return;
                 }
                 attemptsMade++; 
                 setEmptyInputBox();
@@ -81,6 +84,9 @@ public class MainBoard extends JPanel {
                     grid.updateRow(userGuess, attemptsMade);
                     JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
                 }
+                // no longer accept user input
+                textInputBox.setEnabled(false);
+                setEmptyInputBox(); 
                 
             }
         });
