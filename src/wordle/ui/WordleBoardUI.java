@@ -1,4 +1,4 @@
-package wordle.ui;
+package ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
