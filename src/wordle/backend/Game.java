@@ -28,10 +28,9 @@ public class Game {
     // String to store remaining letters that have not been tried
     private static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
 
-    // initializing colors
-    static final Color green;
-    static final Color yellow;
-    static final Color gray;
+    static final Color green = Color.decode("#538D4E");
+    static final Color yellow = Color.decode("#B59F3B");
+    static final Color gray = Color.decode("#3A3A3C");
     static final Color orange = Color.decode("#F5793A");
     static final Color lightBlue = Color.decode("#85C0F9");
     
@@ -197,7 +196,6 @@ public class Game {
         // error message
 
     }
+}
 
 
-}
-}
