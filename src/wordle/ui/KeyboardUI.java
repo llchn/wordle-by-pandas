@@ -3,6 +3,7 @@ package ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -11,7 +12,8 @@ import javax.swing.JPanel;
  * @author Linda Hu
  * 
  * Sources used: 
- * https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html#drawString-java.lang.String-int-int-
+ * Example graphics code provided,
+ * https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html#drawString-java.lang.String-int-int-,
  * 
  * 
  */
@@ -24,12 +26,12 @@ public class KeyboardUI extends JPanel {
 		{"ENTER","Z","X","C","V","B","N","M","DELETE"}};
 
     private static final int ROWS = 3; 
-    // Temporary Col Value
+    // Maximum Col Value
     private static int COLS = 10; 
 
     // Keyboard cell sizes
-    private static int CELL_WIDTH = 40;
-    private static final int CELL_HEIGHT = 40;
+    private static final int CELL_WIDTH = 45;
+    private static final int CELL_HEIGHT = 45;
     private static final int CELL_GAP = 2;
     
     int 	KEYBOARD_WIDTH = COLS * (CELL_WIDTH + CELL_GAP) + CELL_GAP;
@@ -57,7 +59,7 @@ public class KeyboardUI extends JPanel {
     	        
     	        for (int c = 0; c < COLS; c++) {
     	            cellKeys[r][c] = KEYS[r][c]; 
-    	            cellColors[r][c] = lightGray;  
+    	            cellColors[r][c] = Color.WHITE;  
     	        }
     	    }
 
@@ -75,22 +77,46 @@ public class KeyboardUI extends JPanel {
 
     	    for (int r = 0; r < ROWS; r++) {
     	        int columns = KEYS[r].length;
-    	        for (int c = 0; c < columns; c++) {
-    	            int cellLeft = CELL_GAP + c * (CELL_WIDTH + CELL_GAP);
-    	            int cellTop = CELL_GAP + r * (CELL_HEIGHT + CELL_GAP);
+    	        
+    	        // Creates pointers to a cell's top left corner
+    	        int cellLeft = CELL_GAP;
+    	        int cellTop = CELL_GAP + r * (CELL_HEIGHT + CELL_GAP);
+    	        int currentCellWidth;
 
-    	            g.setColor(cellColors[r][c]);
-    	            g.fillRect(cellLeft, cellTop, CELL_WIDTH, CELL_HEIGHT);
+    	        
+    	        for (int c = 0; c < columns; c++) {
+    	        		String currentKey = cellKeys[r][c];
+    	        		
+    	        		// Adjust position for the 2nd row of keys
+    	        		if (currentKey.equals("A")) {
+    	        			cellLeft += 20;
+    	        		}
+    	        		// Create larger key cells for "ENTER" & "DELETE"
+    	        		if (currentKey.equals("ENTER") || currentKey.equals("DELETE")) {
+    	        			currentCellWidth = 69;
+    	        		}
+    	        		else {
+    	        			currentCellWidth = 45;
+    	        		}
+    	        		    	           
+    	        		// Fill colors
+    	            g.setColor(lightGray);
+    	            g.fillRect(cellLeft, cellTop, currentCellWidth, CELL_HEIGHT);
 
     	            g.setColor(Color.BLACK);
-    	            g.drawRect(cellLeft, cellTop, CELL_WIDTH, CELL_HEIGHT);
-
-    	            String currentKey = cellKeys[r][c];
-
-    	            int midWidth = cellLeft + CELL_WIDTH / 2;
-    	            int midHeight = cellTop + CELL_HEIGHT / 2;
-
-    	            g.drawString(currentKey, midWidth, midHeight);
+    	            g.drawRect(cellLeft, cellTop, currentCellWidth, CELL_HEIGHT);
+    	            
+    	            //get specifics metrics of each cell to scale exactly to the middle of box
+    	            FontMetrics metrics = g.getFontMetrics(); 
+                int letterWidth = metrics.stringWidth(currentKey);
+                int letterHeight = metrics.getHeight(); 
+                 // Draw character in the middle of the cell
+    	            int midWidth = cellLeft + (currentCellWidth - letterWidth)/2;
+    	            int midHeight = cellTop + (CELL_HEIGHT - letterHeight);
+                g.drawString(currentKey, midWidth, midHeight);
+    	            
+    	            // Update pointer to next cells' top left corner
+    	            cellLeft += currentCellWidth + CELL_GAP;
     	        }
     	    }
     	}

@@ -43,6 +43,7 @@ public class MainBoard extends JPanel {
         // Create panel to place keyboard component on
         JPanel keyboardPanel = new JPanel();
         keyboardPanel.setBackground(Color.WHITE);
+
         
         //Create the bottom panel to place the input text box
         JPanel bottomPanel = new JPanel();
@@ -103,9 +104,8 @@ public class MainBoard extends JPanel {
         
         p.add(grid);
 
-        // add the wordle panel to the window and set the size of the window
+        // add the wordle panel to the window
         f.add(p, BorderLayout.NORTH);
-        f.setSize(650, 650);
         
         // create the keyboard component and place in panel
         keyboardPanel.add(new KeyboardUI());
@@ -113,6 +113,9 @@ public class MainBoard extends JPanel {
         
         //add the panel with input box to the window
         f.add(bottomPanel, BorderLayout.SOUTH);
+        
+        // set the size of the window
+        f.setSize(650,650);
         
         // prevents the user from resizing the window
         f.setResizable(false);
