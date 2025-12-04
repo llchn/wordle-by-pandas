@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ import javax.swing.JOptionPane;
 public class MainBoard extends JPanel {
     private JTextField textInputBox; 
     private WordleBoardUI grid; 
+    private KeyboardUI keyboard;
     private int attemptsMade = 0; 
     
     /**
@@ -37,6 +39,10 @@ public class MainBoard extends JPanel {
         // Create the panel to place the Wordle board component on
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
+        
+        // Create panel to place keyboard component on
+        JPanel keyboardPanel = new JPanel();
+        keyboardPanel.setBackground(Color.WHITE);
         
         //Create the bottom panel to place the input text box
         JPanel bottomPanel = new JPanel();
@@ -98,8 +104,12 @@ public class MainBoard extends JPanel {
         p.add(grid);
 
         // add the wordle panel to the window and set the size of the window
-        f.add(p, BorderLayout.CENTER);
+        f.add(p, BorderLayout.NORTH);
         f.setSize(650, 650);
+        
+        // create the keyboard component and place in panel
+        keyboardPanel.add(new KeyboardUI());
+        f.add(keyboardPanel, BorderLayout.CENTER);
         
         //add the panel with input box to the window
         f.add(bottomPanel, BorderLayout.SOUTH);
@@ -109,6 +119,8 @@ public class MainBoard extends JPanel {
         
         // display the window
         f.setVisible(true);
+        
+
 
     }
     /**
