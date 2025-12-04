@@ -126,20 +126,31 @@ public class Game {
     /**
      * Switches the existing colors on the board to a high contrast mode for accessibility 
      */
-    public static void highContrastMode() {
+    public static void highContrastMode(char letter) {
         // for each square in the grid
-        // if color is yellow switch to light blue
-        // if color is green switch to orange
+        for (Map.Entry<Character, Color> entry : gridMap.entrySet()) {
+            if (gridMap.get(letter) == yellow) { // if color is yellow switch to light blue
+                gridMap.put(letter, lightBlue);
+            } else if (gridMap.get(letter) == green) { // if color is green switch to orange
+                gridMap.put(letter, orange);
+            }
+        }
+
         // for each key in keyboard
-        // if color is yellow switch to light blue
-        // if color is green switch to orange
+        for (Map.Entry<Character, Color> entry : keyboardMap.entrySet()) {
+            if (keyboardMap.get(letter) == yellow) { // if color is yellow switch to light blue
+                keyboardMap.put(letter, lightBlue);
+            } else if (keyboardMap.get(letter) == green) { // if color is green switch to orange
+                keyboardMap.put(letter, orange);
+            }
+        }
         return;
     }
 
     /**
      * Switches the existing colors on the board to a high contrast mode for accessibility 
      */
-    public static void normalMode() {
+    public static void normalMode(char letter) {
         // for each square in the grid
         // if color is light blue switch to yellow
         // if color is orange switch to green
