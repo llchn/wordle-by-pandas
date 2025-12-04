@@ -37,8 +37,8 @@ public class WordleBoardUI extends JComponent {
     private static final int GRID_HEIGHT = (ROWS * CELL_SIZE) + ((ROWS - 1) * CELL_GAP);
     
     private static final int COMPONENT_WIDTH = CELL_LEFT * 2 + GRID_WIDTH;
-    private static final int COMPONENT_HEIGHT = CELL_TOP * 2 + GRID_HEIGHT;
-    
+    private static final int COMPONENT_HEIGHT = CELL_TOP + GRID_HEIGHT;
+
     // start points for drawing boxes
     private static final int START_LEFT = (COMPONENT_WIDTH - GRID_WIDTH)/2;
     private static final int START_TOP = (COMPONENT_HEIGHT - GRID_HEIGHT)/2;  
