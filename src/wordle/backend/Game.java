@@ -1,6 +1,7 @@
 package backend;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class Game {
     private static String correctGuess = Dictionary.getValidTarget();
 
     // String that stores user's current guess
-    private static String userGuess =  ""; // Mainboard.getUserInput();
+    private static String userGuess =  "panda"; // Mainboard.getUserInput();
 
     // String to store all possible input values
     private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -159,50 +160,96 @@ public class Game {
         // if color is orange switch to green
         return;
     }
-
+    
+    /**
+     * check and update colors for each guess made by user
+     * @param inputGuess 
+     */
+    public static Color[] getColorsForInput (String inputGuess, String targetWord) {
+        Color[] rowColors = new Color[5];
+        HashMap<Character, Integer> targetCount = new HashMap<>(); 
+        // put into a hashmap to store the count of each letter in target word
+        for (char c : targetWord.toCharArray()) {
+            targetCount.put(c, targetCount.getOrDefault(c, 0)+1); 
+        }
+        
+        // setting color to green if there are correct matches (location + presence)
+        for (int i =0; i<5; i++) { 
+            char targetLetter = targetWord.charAt(i); 
+            char inputLetter = inputGuess.charAt(i);
+            
+            
+            if (targetLetter==inputLetter) {
+                rowColors[i] = green; 
+                targetCount.put(targetLetter, targetCount.get(targetLetter)-1);   
+            }
+        }
+        // setting color to yellow if there are presence matches
+        for (int i=0; i< 5; i++) {
+            char inputLetter = inputGuess.charAt(i); 
+            // skip this check if the character has a color already
+            if (rowColors[i]!=null) { 
+                continue;
+            }
+            // check if this letter from input exists in the target word and it hasnt used up yet
+            if(targetCount.containsKey(inputLetter)&&targetCount.get(inputLetter)>0) {
+                rowColors[i] = yellow; 
+                targetCount.put(inputLetter, targetCount.get(inputLetter)-1);                
+            }
+            // otherwise (the input letter neither exists in target nor at the correct location), set as gray
+            else { 
+                rowColors[i] = gray; 
+            }
+        }
+        return rowColors;
+        
+    }
+    
     /**
      * Play game.
      */
     public static void main (String[] args) {
-        // if user presses return
-        //check if colorBlindMode is on
-        if (true) { //colorBlindButtonPressed
-            highContrastMode();
-        }
-        // if colorBlindMode is off
-        if (true) { //colorBlindButtonPressed
-            normalMode();
-        }
-        // Error message "Not in word list" if word is not in dictionary
-        if (!Dictionary.isValidGuess(userGuess)) {
-            // popup error message "Not in word list"
-        }
-        // Error message "Too short" if fewer than 5 letters 
-        // Error message "Too long" if more than 5 letters 
-        // if user has won, no longer accept user input
-        if (correctGuess == userGuess) {
-            // popup with message that they won
-            // end game
-        }
-        // if valid
-        if (Dictionary.isValidGuess(userGuess)) {
-            // update colors accordingly
-            for (char c : userGuess.toCharArray()) {
-                if (presenceKnown(c) && letterLocationKnown(c)){
-                    // set square to green
-                    gridMap.put(c, green);
-                    // set keyboard to green
-                } else if (absenceKnown(c)) {
-                    // set square to dark gray
-                    gridMap.put(c, gray);
-                    // set keyboard to dark gray
-                } else if (presenceKnown(c)) {
-                    // set square to yellow
-                    gridMap.put(c, yellow);
-                    // set keyboard to yellow
-                }
-            }
-        }
+        System.out.println("hello");
+        System.out.println(Arrays.toString(getColorsForInput(userGuess, correctGuess)));
+//        // if user presses return
+//        //check if colorBlindMode is on
+//        if (true) { //colorBlindButtonPressed
+//            highContrastMode();
+//        }
+//        // if colorBlindMode is off
+//        if (true) { //colorBlindButtonPressed
+//            normalMode();
+//        }
+//        // Error message "Not in word list" if word is not in dictionary
+//        if (!Dictionary.isValidGuess(userGuess)) {
+//            // popup error message "Not in word list"
+//        }
+//        // Error message "Too short" if fewer than 5 letters 
+//        // Error message "Too long" if more than 5 letters 
+//        // if user has won, no longer accept user input
+//        if (correctGuess == userGuess) {
+//            // popup with message that they won
+//            // end game
+//        }
+//        // if valid
+//        if (Dictionary.isValidGuess(userGuess)) {
+//            // update colors accordingly
+//            for (char c : userGuess.toCharArray()) {
+//                if (presenceKnown(c) && letterLocationKnown(c)){
+//                    // set square to green
+//                    gridMap.put(c, green);
+//                    // set keyboard to green
+//                } else if (absenceKnown(c)) {
+//                    // set square to dark gray
+//                    gridMap.put(c, gray);
+//                    // set keyboard to dark gray
+//                } else if (presenceKnown(c)) {
+//                    // set square to yellow
+//                    gridMap.put(c, yellow);
+//                    // set keyboard to yellow
+//                }
+//            }
+//        } 
         // else
         // error message
 
