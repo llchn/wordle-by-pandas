@@ -8,7 +8,8 @@ import java.util.Map;
 /**
  * 
  * 
- * @author Felicia Nemoto-Pace Sources used: previous programming assignments,
+ * @author Felicia Nemoto-Pace 
+ * Sources used: previous programming assignments,
  * 
  */
 public class Game {
@@ -49,6 +50,7 @@ public class Game {
 
     /**
      * Switches to a high contrast mode for accessibility
+     * @param clicked 
      */
     public static void setContrastMode(boolean clicked) {
         isContrastMode = clicked;
@@ -154,14 +156,5 @@ public class Game {
             count++;
         }
         System.out.println(Arrays.toString(resultColor));
-//        // if user presses return
-//        //check if colorBlindMode is on
-//        if (true) { //colorBlindButtonPressed
-//            highContrastMode();
-//        }
-//        // if colorBlindMode is off
-//        if (true) { //colorBlindButtonPressed
-//            normalMode();
-//        }
     }
 }
