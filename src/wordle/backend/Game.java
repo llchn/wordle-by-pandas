@@ -29,7 +29,7 @@ public class Game {
     private static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
 
     // boolean to switch on/off the high contrast mode
-    private boolean isContrastMode = false;
+    private static boolean isContrastMode = false;
 
     // colors for standard mode
     public static final Color GREEN = new Color(98, 183, 61);
@@ -40,49 +40,47 @@ public class Game {
     public static final Color ORANGE = new Color(255, 130, 5);
     public static final Color LIGHT_BLUE = new Color(0, 134, 255);
 
-    // HashMap to store letters for userGuess and corresponding color in grid
-    private static HashMap<Character, Color> gridMap = new HashMap<>(5);
+//    // HashMap to store letters for userGuess and corresponding color in grid
+//    private static HashMap<Character, Color> gridMap = new HashMap<>(5);
+//
+//    // HashMap to store letters on keyboard and corresponding color
+//    private static HashMap<Character, Color> keyboardMap = new HashMap<>(26);
 
-    // HashMap to store letters on keyboard and corresponding color
-    private static HashMap<Character, Color> keyboardMap = new HashMap<>(26);
-
-    public Game() {
-        // store letters of userGuess in map
-        for (int i = 0; i < userGuess.length(); i++) {
-            keyboardMap.put(alphabet.charAt(i), GRAY);
-        }
-
-        // store letters of alphabet in map
-        for (int j = 0; j < alphabet.length(); j++) {
-            keyboardMap.put(alphabet.charAt(j), GRAY);
-        }
-    }
 
     /**
      * Switches to a high contrast mode for accessibility
      */
-    public void setContrastMode() {
-        isContrastMode = true;
+    public static void setContrastMode(boolean clicked) {
+        isContrastMode = clicked;
     }
     
-    public Color correctColor() { 
+    /**
+     * @return
+     */
+    public static Color getCorrectColor() { 
         if (isContrastMode) { 
             return ORANGE; 
             
+        } else { 
+            return GREEN;
+        }
+    }
+    
+    /**
+     * @return
+     */
+    public static Color getPresentColor() { 
+        if (isContrastMode) { 
+            return LIGHT_BLUE; 
         } else { 
             return YELLOW;
         }
     }
     
-    public Color presentColor() { 
-        if (isContrastMode) { 
-            return GREEN; 
-        } else { 
-            return LIGHT_BLUE;
-        }
-    }
-    
-    public Color absentColor() { 
+    /**
+     * @return
+     */
+    public static Color getAbsentColor() { 
         return GRAY;
     }
 
@@ -108,7 +106,7 @@ public class Game {
             char inputLetter = inputGuess.charAt(i);
 
             if (targetLetter == inputLetter) {
-                rowColors[i] = GREEN;
+                rowColors[i] = getCorrectColor();
                 targetCount.put(targetLetter,
                         targetCount.get(targetLetter) - 1);
             }
@@ -124,13 +122,13 @@ public class Game {
             // hasnt used up yet
             if (targetCount.containsKey(inputLetter)
                     && targetCount.get(inputLetter) > 0) {
-                rowColors[i] = YELLOW;
+                rowColors[i] = getPresentColor();
                 targetCount.put(inputLetter, targetCount.get(inputLetter) - 1);
             }
             // otherwise (the input letter neither exists in target nor at the
             // correct location), set as gray
             else {
-                rowColors[i] = GRAY;
+                rowColors[i] = getAbsentColor();
             }
         }
         return rowColors;

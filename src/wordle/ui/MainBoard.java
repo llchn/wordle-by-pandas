@@ -2,7 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +17,9 @@ import javax.swing.JOptionPane;
  * 
  * Sources: 
  * Java Swing dialog boxes https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+ * Java Swing combo boxes https://docs.oracle.com/javase/8/docs/api/javax/swing/JComboBox.html
+ * 
+ * Cryptography programming assignment
  * 
  * @author Lily Tran
  */
@@ -25,6 +28,7 @@ public class MainBoard extends JPanel {
     private WordleBoardUI grid; 
     private KeyboardUI keyboard;
     private int attemptsMade = 0; 
+    private JComboBox<String> viewModeBox;
     
     /**
      * Creates the window and puts the graphics inside (wordle grid, input box)
@@ -52,6 +56,13 @@ public class MainBoard extends JPanel {
         
         bottomPanel.add(textBoxLabel); 
         bottomPanel.add(textInputBox);
+        
+        JLabel comboBoxLabel = new JLabel("View mode:");
+        String[] viewModeOptions = {"Default", "High contrast"};
+        viewModeBox = new JComboBox<>(viewModeOptions);
+        
+        bottomPanel.add(comboBoxLabel); 
+        bottomPanel.add(viewModeBox);
         
         String targetWord = Dictionary.getValidTarget();
         System.out.println(targetWord);
@@ -98,9 +109,15 @@ public class MainBoard extends JPanel {
                 textInputBox.setEnabled(false);
                 setEmptyInputBox(); 
                 
-            }
+            }            
         });
-      
+        
+        viewModeBox.addActionListener(event -> {
+            String modeSelected = viewModeBox.getSelectedItem().toString();
+            setViewMode(modeSelected);
+            grid.updateRowColorMode();
+        });
+
         
         // create the wordle board component, place it into the panel
         grid = new WordleBoardUI();
@@ -128,6 +145,15 @@ public class MainBoard extends JPanel {
         
 
 
+    }
+    
+    public void setViewMode(String modeName) { 
+        if(modeName.equals("Default")) {
+            Game.setContrastMode(false);
+        }
+        else if (modeName.equals("High contrast")) {
+            Game.setContrastMode(true);
+        }
     }
     /**
      * Gets the word that the user enters inside the box

@@ -8,6 +8,8 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
+import backend.Game;
+
 /**
  * displays the grid containing six 5-letter word guesses
  * 
@@ -121,7 +123,7 @@ public class WordleBoardUI extends JComponent {
         repaint();
     }
     /**
-     * tell Java to redraw after updating color data for a row
+     * tell Java to paint new rows with updated color data
      * @param colors the color data array we get after correctness check
      * @param row
      */
@@ -131,4 +133,28 @@ public class WordleBoardUI extends JComponent {
         }
         repaint();
     }
+    /**
+     * tell Java to paint the existing rows in a given color mode
+     */
+    public void updateRowColorMode() { 
+        for (int r = 0; r<6; r ++) {
+            for (int c =0; c<5; c++) {
+                Color currColorStatus = cellColors[r][c];    
+                if (currColorStatus.equals(Game.GREEN)) {
+                    cellColors[r][c] = Game.ORANGE;
+                }
+                else if (currColorStatus.equals(Game.YELLOW)){
+                    cellColors[r][c] = Game.LIGHT_BLUE;
+                }                
+                else if (currColorStatus.equals(Game.LIGHT_BLUE)){
+                    cellColors[r][c] = Game.YELLOW;
+                }
+                else if (currColorStatus.equals(Game.ORANGE)) {
+                    cellColors[r][c] = Game.GREEN;
+                }
+            }
+        }
+        repaint();
+    }
+    
 }
