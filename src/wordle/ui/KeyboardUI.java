@@ -126,7 +126,7 @@ public class KeyboardUI extends JPanel {
      * @param colors the color data array we get after any correctness check
      * @param row
      */
-    public void updateRowColors(String key, Color color) { 
+    public void updateKeyColors(String key, Color color) { 
         for (int r = 0; r<ROWS; r++) { 
             for (int c = 0; c< KEYS[r].length; c++) {
                 String currKey = cellKeys[r][c];
