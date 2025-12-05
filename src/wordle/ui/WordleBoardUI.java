@@ -29,7 +29,7 @@ public class WordleBoardUI extends JComponent {
     private static final int CELL_LEFT = 25; //int x 
     private static final int CELL_TOP = 50; // int y
     private static final int CELL_SIZE = 50;
-    private static final int CELL_GAP = 10;
+    private static final int CELL_GAP = 4;
     private static final int ROWS = 6; 
     private static final int COLS = 5;
     
@@ -95,8 +95,8 @@ public class WordleBoardUI extends JComponent {
                 g.fillRect(leftMargin, topMargin, CELL_SIZE, CELL_SIZE);
                 if (cellLetters[r][c]!=' ') {
                     
-                    g.setFont(new Font("Helvetica", Font.BOLD, 15));   
-                    g.setColor(Color.black);
+                    g.setFont(new Font("Helvetica", Font.BOLD, 25));   
+                    g.setColor(Color.white);
                     
                     //get specifics metrics of each letter in order to scale it exactly in the middle of box
                     FontMetrics metrics = g.getFontMetrics(); 
