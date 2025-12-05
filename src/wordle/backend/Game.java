@@ -20,14 +20,14 @@ public class Game {
     // String that stores user's current guess
     private static String userGuess = "eerie";
 
-    // String to store all possible input values
-    private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
-
-    // String to store remaining letters that are correct
-    private static String existingLetters = "abcdefghijklmnopqrstuvwxyz";
-
-    // String to store remaining letters that have not been tried
-    private static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
+//    // String to store all possible input values
+//    private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
+//
+//    // String to store remaining letters that are correct
+//    private static String existingLetters = "abcdefghijklmnopqrstuvwxyz";
+//
+//    // String to store remaining letters that have not been tried
+//    private static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
 
     // boolean to switch on/off the high contrast mode
     private static boolean isContrastMode = false;

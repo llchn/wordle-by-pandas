@@ -67,16 +67,10 @@ public class WordleBoardUI extends JComponent {
                 cellColors[r][c] = DEFAULT_COLOR;  
             }
         }
-        // dummy test to see how letters will appear, *delete later
-//        cellLetters[0][0] = 'D'; 
-//        cellLetters[0][1] = 'O'; 
-//        cellLetters[0][2] = 'N'; 
-//        cellLetters[0][3] = 'U'; 
-//        cellLetters[0][4] = 'T'; 
         this.setPreferredSize(new Dimension(COMPONENT_WIDTH, COMPONENT_HEIGHT));          
     }
     
-    // default cell color
+    // default cell color (baby blue)
     private static final Color CELL_COLOR = new Color(221, 240, 240);
     
     /**

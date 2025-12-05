@@ -7,6 +7,8 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+import backend.Game;
+
 /**
  * 
  * @author Linda Hu
@@ -118,6 +120,40 @@ public class KeyboardUI extends JPanel {
                 cellLeft += currentCellWidth + CELL_GAP;
             }
         }
+    }
+    /**
+     * tell Java to paint new rows with updated color data
+     * @param colors the color data array we get after correctness check
+     * @param row
+     */
+    public void updateRowColors(Color[] colors, int row) { 
+        for (int i =0; i< COLS; i++) { 
+            cellColors[row][i] = colors[i];
+        }
+        repaint();
+    }
+    /**
+     * tell Java to paint the existing rows in the given color mode
+     */
+    public void updateKeyColorMode() { 
+        for (int r = 0; r<ROWS; r ++) {
+            for (int c =0; c<COLS; c++) {
+                Color currColorStatus = cellColors[r][c];    
+                if (currColorStatus.equals(Game.GREEN)) {
+                    cellColors[r][c] = Game.ORANGE;
+                }
+                else if (currColorStatus.equals(Game.YELLOW)){
+                    cellColors[r][c] = Game.LIGHT_BLUE;
+                }                
+                else if (currColorStatus.equals(Game.LIGHT_BLUE)){
+                    cellColors[r][c] = Game.YELLOW;
+                }
+                else if (currColorStatus.equals(Game.ORANGE)) {
+                    cellColors[r][c] = Game.GREEN;
+                }
+            }
+        }
+        repaint();
     }
 
 }

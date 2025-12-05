@@ -18,7 +18,7 @@ import java.io.File;
  */
 public class Dictionary {
 	
-	// List to hold the contents of the common_words.txt file
+	//List to hold the contents of the common_words.txt file
 	public static List<String> commonWords = new ArrayList<>();
 	
 	// List to hold the contents of the EnglishWords.txt file
