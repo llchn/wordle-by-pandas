@@ -144,7 +144,7 @@ public class KeyboardUI extends JPanel {
                         return;
                     }
                     //if current color is neither correct nor present just update with the given color
-                    currKeyColor = color;
+                    cellColors[r][c] = color;
                     repaint();
                     return;
                     }

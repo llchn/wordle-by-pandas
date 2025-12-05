@@ -87,11 +87,13 @@ public class MainBoard extends JPanel {
                 //update colors for the grid's relevant row
                 grid.updateRowLetters(userGuess, attemptsMade);
                 grid.updateRowColors(resultColor, attemptsMade);
+                
                 //update colors for keyboard
                 for (int i=0; i<5; i++) {
                     String letterToColor = String.valueOf(userGuess.charAt(i)).toUpperCase();
                     keyboard.updateKeyColors(letterToColor, resultColor[i]);
                 }
+
                 if (userGuess.equals(targetWord)) {
                     JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
                     // no longer accept user input
@@ -128,6 +130,7 @@ public class MainBoard extends JPanel {
         // create the wordle board and keyboard component, place it into the panel
         grid = new WordleBoardUI();
         keyboard = new KeyboardUI();
+
         p.add(grid);
 
         // add the wordle panel to the window
