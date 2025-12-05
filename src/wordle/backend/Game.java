@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import ui.MainBoard; 
 
 /**
  * 
@@ -15,10 +16,10 @@ import java.util.Map;
 public class Game {
 
     // String that stores correct guess
-    private static String correctGuess = Dictionary.getValidTarget();
+    private static String correctWord = "teeth";
 
     // String that stores user's current guess
-    private static String userGuess =  "panda"; // Mainboard.getUserInput();
+    private static String userGuess =  "eerie"; 
 
     // String to store all possible input values
     private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -28,85 +29,88 @@ public class Game {
 
     // String to store remaining letters that have not been tried
     private static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
-
-    static final Color green = Color.decode("#538D4E");
-    static final Color yellow = Color.decode("#B59F3B");
-    static final Color gray = Color.decode("#3A3A3C");
-    static final Color orange = Color.decode("#F5793A");
-    static final Color lightBlue = Color.decode("#85C0F9");
     
- // HashMap to store letters for userGuess and corresponding color in grid
+    // colors for standard mode
+    static final Color GREEN = new Color(98,183,61); 
+    static final Color YELLOW = new Color(200,182,83);
+    static final Color GRAY = new Color(120,124,127); 
+    
+    // colors for high contrast mode 
+    static final Color ORANGE = new Color(255,130,5); 
+    static final Color LIGHT_BLUE = new Color(0,134,255); 
+    
+    // HashMap to store letters for userGuess and corresponding color in grid
      private static HashMap<Character, Color> gridMap = new HashMap<>(5);
     
- // HashMap to store letters on keyboard and corresponding color
+     // HashMap to store letters on keyboard and corresponding color
     private static HashMap<Character, Color> keyboardMap = new HashMap<>(26);
 
 
     public Game() {
         // store letters of userGuess in map
         for (int i = 0; i < userGuess.length(); i++) {
-            keyboardMap.put(alphabet.charAt(i), gray);
+            keyboardMap.put(alphabet.charAt(i), GRAY);
         }
 
         // store letters of alphabet in map
         for (int j = 0; j < alphabet.length(); j++) {
-            keyboardMap.put(alphabet.charAt(j), gray);
+            keyboardMap.put(alphabet.charAt(j), GRAY);
         }
     }
 
 
 
-    /**
-     * Checks a letter to see if absence is known and colors keyboard and mainboard accordingly
-     * @param letter to be checked
-     * @return true if absence known
-     */
-    public static boolean absenceKnown(char letter) {
-        // if letter exists in existingLetters, then the absence is not known
-        if (existingLetters.indexOf(letter) > 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
-     * Checks a letter to see if absence is known and colors keyboard and mainboard accordingly
-     * @param letter to be checked
-     * @return true if absence known
-     */
-    public static boolean presenceKnown(char letter) {
-        // if letter exists in existingLetters, then presenceKnown
-        if (existingLetters.indexOf(letter) > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Checks a letter to see if absence is known and colors keyboard and mainboard accordingly
-     * @param letter to be checked
-     * @return true if letter has not been tried
-     */
-    public boolean keyNotTried(char letter) {
-        // if letter exists in lettersNotTried, return true
-        if (lettersNotTried.indexOf(letter) > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Checks a letter is in the correct spot on the grid
-     * @param letter to be checked
-     * @return true if letter has not been tried
-     */
-    public static boolean letterLocationKnown(char letter) {
-        //to be filled
-        return false;
-    }
+//    /**
+//     * Checks a letter to see if absence is known and colors keyboard and mainboard accordingly
+//     * @param letter to be checked
+//     * @return true if absence known
+//     */
+//    public static boolean absenceKnown(char letter) {
+//        // if letter exists in existingLetters, then the absence is not known
+//        if (existingLetters.indexOf(letter) > 0) {
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+//
+//    /**
+//     * Checks a letter to see if absence is known and colors keyboard and mainboard accordingly
+//     * @param letter to be checked
+//     * @return true if absence known
+//     */
+//    public static boolean presenceKnown(char letter) {
+//        // if letter exists in existingLetters, then presenceKnown
+//        if (existingLetters.indexOf(letter) > 0) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//
+//    /**
+//     * Checks a letter to see if absence is known and colors keyboard and mainboard accordingly
+//     * @param letter to be checked
+//     * @return true if letter has not been tried
+//     */
+//    public boolean keyNotTried(char letter) {
+//        // if letter exists in lettersNotTried, return true
+//        if (lettersNotTried.indexOf(letter) > 0) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//
+//    /**
+//     * Checks a letter is in the correct spot on the grid
+//     * @param letter to be checked
+//     * @return true if letter has not been tried
+//     */
+//    public static boolean letterLocationKnown(char letter) {
+//        //to be filled
+//        return false;
+//    }
 
     /**
      * Updates colors of grid and keyboard
@@ -130,19 +134,19 @@ public class Game {
     public static void highContrastMode(char letter) {
         // for each square in the grid
         for (Map.Entry<Character, Color> entry : gridMap.entrySet()) {
-            if (gridMap.get(letter) == yellow) { // if color is yellow switch to light blue
-                gridMap.put(letter, lightBlue);
-            } else if (gridMap.get(letter) == green) { // if color is green switch to orange
-                gridMap.put(letter, orange);
+            if (gridMap.get(letter) == YELLOW) { // if color is yellow switch to light blue
+                gridMap.put(letter, LIGHT_BLUE);
+            } else if (gridMap.get(letter) == GREEN) { // if color is green switch to orange
+                gridMap.put(letter, ORANGE);
             }
         }
 
         // for each key in keyboard
         for (Map.Entry<Character, Color> entry : keyboardMap.entrySet()) {
-            if (keyboardMap.get(letter) == yellow) { // if color is yellow switch to light blue
-                keyboardMap.put(letter, lightBlue);
-            } else if (keyboardMap.get(letter) == green) { // if color is green switch to orange
-                keyboardMap.put(letter, orange);
+            if (keyboardMap.get(letter) == YELLOW) { // if color is yellow switch to light blue
+                keyboardMap.put(letter, LIGHT_BLUE);
+            } else if (keyboardMap.get(letter) == GREEN) { // if color is green switch to orange
+                keyboardMap.put(letter, ORANGE);
             }
         }
         return;
@@ -180,7 +184,7 @@ public class Game {
             
             
             if (targetLetter==inputLetter) {
-                rowColors[i] = green; 
+                rowColors[i] = GREEN; 
                 targetCount.put(targetLetter, targetCount.get(targetLetter)-1);   
             }
         }
@@ -193,12 +197,12 @@ public class Game {
             }
             // check if this letter from input exists in the target word and it hasnt used up yet
             if(targetCount.containsKey(inputLetter)&&targetCount.get(inputLetter)>0) {
-                rowColors[i] = yellow; 
+                rowColors[i] = YELLOW; 
                 targetCount.put(inputLetter, targetCount.get(inputLetter)-1);                
             }
             // otherwise (the input letter neither exists in target nor at the correct location), set as gray
             else { 
-                rowColors[i] = gray; 
+                rowColors[i] = GRAY; 
             }
         }
         return rowColors;
@@ -210,7 +214,22 @@ public class Game {
      */
     public static void main (String[] args) {
         System.out.println("hello");
-        System.out.println(Arrays.toString(getColorsForInput(userGuess, correctGuess)));
+        String[] resultColor = new String[5]; 
+        Color[] colorOutput= getColorsForInput(userGuess, correctWord);
+        int count = 0;
+        for(Color color : colorOutput) { 
+            if(color.equals(GREEN)) {
+                resultColor[count] = "green";        
+            }
+            else if (color.equals(YELLOW)){
+                resultColor[count] = "yellow";  
+            }
+            else { 
+                resultColor[count] = "gray";      
+            }
+            count++;
+        }
+        System.out.println(Arrays.toString(resultColor));
 //        // if user presses return
 //        //check if colorBlindMode is on
 //        if (true) { //colorBlindButtonPressed
@@ -220,39 +239,6 @@ public class Game {
 //        if (true) { //colorBlindButtonPressed
 //            normalMode();
 //        }
-//        // Error message "Not in word list" if word is not in dictionary
-//        if (!Dictionary.isValidGuess(userGuess)) {
-//            // popup error message "Not in word list"
-//        }
-//        // Error message "Too short" if fewer than 5 letters 
-//        // Error message "Too long" if more than 5 letters 
-//        // if user has won, no longer accept user input
-//        if (correctGuess == userGuess) {
-//            // popup with message that they won
-//            // end game
-//        }
-//        // if valid
-//        if (Dictionary.isValidGuess(userGuess)) {
-//            // update colors accordingly
-//            for (char c : userGuess.toCharArray()) {
-//                if (presenceKnown(c) && letterLocationKnown(c)){
-//                    // set square to green
-//                    gridMap.put(c, green);
-//                    // set keyboard to green
-//                } else if (absenceKnown(c)) {
-//                    // set square to dark gray
-//                    gridMap.put(c, gray);
-//                    // set keyboard to dark gray
-//                } else if (presenceKnown(c)) {
-//                    // set square to yellow
-//                    gridMap.put(c, yellow);
-//                    // set keyboard to yellow
-//                }
-//            }
-//        } 
-        // else
-        // error message
-
     }
 }
 
