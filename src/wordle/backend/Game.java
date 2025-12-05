@@ -14,21 +14,6 @@ import java.util.Map;
  */
 public class Game {
 
-    // String that stores correct guess
-    private static String correctWord = "teeth";
-
-    // String that stores user's current guess
-    private static String userGuess = "eerie";
-
-//    // String to store all possible input values
-//    private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
-//
-//    // String to store remaining letters that are correct
-//    private static String existingLetters = "abcdefghijklmnopqrstuvwxyz";
-//
-//    // String to store remaining letters that have not been tried
-//    private static String lettersNotTried = "abcdefghijklmnopqrstuvwxyz";
-
     // boolean to switch on/off the high contrast mode
     private static boolean isContrastMode = false;
 
@@ -143,7 +128,7 @@ public class Game {
     public static void main(String[] args) {
         System.out.println("hello");
         String[] resultColor = new String[5];
-        Color[] colorOutput = getColorsForInput(userGuess, correctWord);
+        Color[] colorOutput = getColorsForInput("teeth", "eerie");
         int count = 0;
         for (Color color : colorOutput) {
             if (color.equals(GREEN)) {
