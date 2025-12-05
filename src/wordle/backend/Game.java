@@ -113,22 +113,6 @@ public class Game {
 //    }
 
     /**
-     * Updates colors of grid and keyboard
-     */
-    //    public static void updateColors() {
-    //        // for item in gridMap, update color using stored color
-    //        for (Map.Entry<Character, Color> entry : gridMap.entrySet()) {
-    //            color = entry.getValue();
-    //        }
-    //        // for item in keyboardMap, update color using stored color
-    //        for (Map.Entry<Character, Color> entry : keyboardMap.entrySet()) {
-    //            color = entry.getValue();
-    //        }
-    //
-    //        return;
-    //    }
-
-    /**
      * Switches the existing colors on the board to a high contrast mode for accessibility 
      */
     public static void highContrastMode(char letter) {

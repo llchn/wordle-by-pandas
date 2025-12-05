@@ -158,6 +158,7 @@ public class Dictionary {
         
         // test the setup method
         filesSetUp(commonFile, englishFile);
+        System.out.println(getValidTarget());
         System.out.println("Dictionary successfully loaded. # of valid words " + validWordleGuesses.size());
         
         

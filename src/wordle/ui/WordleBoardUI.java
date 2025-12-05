@@ -47,6 +47,9 @@ public class WordleBoardUI extends JComponent {
     private char[][] cellLetters;
     private Color[][] cellColors;
     
+    //default color for each cell
+    private static final Color DEFAULT_COLOR = new Color(207,226,243);
+    
     /**
      * Constructor 
      */
@@ -59,7 +62,7 @@ public class WordleBoardUI extends JComponent {
         for (int r = 0; r < ROWS; r++) { 
             for (int c = 0; c < COLS; c++) {
                 cellLetters[r][c] = ' '; 
-                cellColors[r][c] = Color.white;  
+                cellColors[r][c] = DEFAULT_COLOR;  
             }
         }
         // dummy test to see how letters will appear, *delete later
@@ -88,7 +91,7 @@ public class WordleBoardUI extends JComponent {
                 int topMargin = START_TOP + (r * (CELL_SIZE + CELL_GAP));
                 
                 //drawing the box first to avoid contradicting colors (cell's vs letter's colors)
-                g.setColor(CELL_COLOR);
+                g.setColor(cellColors[r][c]);
                 g.fillRect(leftMargin, topMargin, CELL_SIZE, CELL_SIZE);
                 if (cellLetters[r][c]!=' ') {
                     
@@ -107,13 +110,24 @@ public class WordleBoardUI extends JComponent {
         }     
     }
     /**
-     * tell Java to redraw after updating any word data for a row
+     * tell Java to redraw after updating word data for a row
      * @param word
      * @param row
      */
-    public void updateRow(String word, int row) {
+    public void updateRowLetters(String word, int row) {
         for (int i = 0; i<5; i++) {
             cellLetters[row][i] = word.charAt(i);
+        }
+        repaint();
+    }
+    /**
+     * tell Java to redraw after updating color data for a row
+     * @param colors the color data array we get after correctness check
+     * @param row
+     */
+    public void updateRowColors(Color[] colors, int row) { 
+        for (int i =0; i< 5; i++) { 
+            cellColors[row][i] = colors[i];
         }
         repaint();
     }
