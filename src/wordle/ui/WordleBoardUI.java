@@ -116,7 +116,7 @@ public class WordleBoardUI extends JComponent {
      */
     public void updateRowLetters(String word, int row) {
         for (int i = 0; i<5; i++) {
-            cellLetters[row][i] = word.charAt(i);
+            cellLetters[row][i] = Character.toUpperCase(word.charAt(i));
         }
         repaint();
     }
