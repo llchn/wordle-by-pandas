@@ -117,7 +117,7 @@ public class WordleBoardUI extends JComponent {
      * @param row
      */
     public void updateRowLetters(String word, int row) {
-        for (int i = 0; i<5; i++) {
+        for (int i = 0; i<COLS; i++) {
             cellLetters[row][i] = Character.toUpperCase(word.charAt(i));
         }
         repaint();
@@ -128,17 +128,17 @@ public class WordleBoardUI extends JComponent {
      * @param row
      */
     public void updateRowColors(Color[] colors, int row) { 
-        for (int i =0; i< 5; i++) { 
+        for (int i =0; i< COLS; i++) { 
             cellColors[row][i] = colors[i];
         }
         repaint();
     }
     /**
-     * tell Java to paint the existing rows in a given color mode
+     * tell Java to paint the existing rows in the given color mode
      */
     public void updateRowColorMode() { 
-        for (int r = 0; r<6; r ++) {
-            for (int c =0; c<5; c++) {
+        for (int r = 0; r<ROWS; r ++) {
+            for (int c =0; c<COLS; c++) {
                 Color currColorStatus = cellColors[r][c];    
                 if (currColorStatus.equals(Game.GREEN)) {
                     cellColors[r][c] = Game.ORANGE;

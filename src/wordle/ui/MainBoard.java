@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
  * Cryptography programming assignment
  * 
  * @author Lily Tran
+ * 
  */
 public class MainBoard extends JPanel {
     private JTextField textInputBox; 
@@ -67,7 +68,7 @@ public class MainBoard extends JPanel {
         String targetWord = Dictionary.getValidTarget();
         System.out.println(targetWord);
           
-        //error messages if errors are detected from input responses 
+        //pop-up messages based on input responses 
         textInputBox.addActionListener(event-> {
             String userGuess = getUserInput().toLowerCase();
             Color[] resultColor = Game.getColorsForInput(userGuess, targetWord);
@@ -143,10 +144,9 @@ public class MainBoard extends JPanel {
         // display the window
         f.setVisible(true);
         
-
-
     }
     
+    // add comment later
     public void setViewMode(String modeName) { 
         if(modeName.equals("Default")) {
             Game.setContrastMode(false);
