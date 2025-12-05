@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import backend.Dictionary;
+import backend.Game;
 import javax.swing.JOptionPane; 
 // test branch
 
@@ -59,7 +60,7 @@ public class MainBoard extends JPanel {
         //error messages if errors are detected from input responses 
         textInputBox.addActionListener(event-> {
             String userGuess = getUserInput().toLowerCase();
-            
+            Color[] resultColor = Game.getColorsForInput(userGuess, targetWord);
             if (getUserInput().length()<5) {
                 JOptionPane.showMessageDialog(f, "Too short!");
                 return; 
@@ -73,7 +74,8 @@ public class MainBoard extends JPanel {
                 return; 
             }
             if (attemptsMade<5) {
-                grid.updateRow(userGuess, attemptsMade);
+                grid.updateRowLetters(userGuess, attemptsMade);
+                grid.updateRowColors(resultColor, attemptsMade);
                 if (userGuess.equals(targetWord)) {
                     JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
                     // no longer accept user input
@@ -84,11 +86,13 @@ public class MainBoard extends JPanel {
                 setEmptyInputBox();
             } else {
                 if (!userGuess.equals(targetWord)) {
-                    grid.updateRow(userGuess, attemptsMade);
+                    grid.updateRowLetters(userGuess, attemptsMade);
+                    grid.updateRowColors(resultColor, attemptsMade);
                     JOptionPane.showMessageDialog(f, "Game over. Correct word: " + targetWord);
                 }
                 else {
-                    grid.updateRow(userGuess, attemptsMade);
+                    grid.updateRowLetters(userGuess, attemptsMade);
+                    grid.updateRowColors(resultColor, attemptsMade);
                     JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
                 }
                 // no longer accept user input
