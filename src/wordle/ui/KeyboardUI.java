@@ -126,33 +126,35 @@ public class KeyboardUI extends JPanel {
      * @param colors the color data array we get after any correctness check
      * @param row
      */
+    // key = a, color = green, used to be yellow.
     public void updateKeyColors(String key, Color color) { 
         for (int r = 0; r<ROWS; r++) { 
             for (int c = 0; c< KEYS[r].length; c++) {
                 String currKey = cellKeys[r][c];
-                Color currKeyColor = cellColors[r][c];
+                
                 if (currKey.equals(key)) {
+                    Color currKeyColor = cellColors[r][c]; //yellow
                     //not update if letter is already correct
-                    if (currKeyColor.equals(Game.getCorrectColor())) {
-                        return;
-                    }
-                    if (currKeyColor.equals(Game.getPresentColor())) {
-                        if (color.equals(Game.getCorrectColor())){
-                            currKeyColor = Game.getCorrectColor();
+                    if (key.equals(currKey)) {
+                        if(currKeyColor.equals(Game.getCorrectColor())) {
                             return;
                         }
+                        if(currKeyColor.equals(Game.getPresentColor())) {
+                            if (color.equals(Game.getCorrectColor())){
+                                cellColors[r][c] = color;
+                                repaint();
+                                return;
+                            }
+                            return;
+                            
+                        }
+                        cellColors[r][c]= color;
+                        repaint();
                         return;
-                    }
-                    //if current color is neither correct nor present just update with the given color
-                    cellColors[r][c] = color;
-                    repaint();
-                    return;
                     }
                     
                 }
             }
         }
-    
-
-
+    }
 }
