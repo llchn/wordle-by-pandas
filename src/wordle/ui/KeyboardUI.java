@@ -100,7 +100,7 @@ public class KeyboardUI extends JPanel {
                 }
 
                 // Fill colors
-                g.setColor(lightGray);
+                g.setColor(cellColors[r][c]);
                 g.fillRect(cellLeft, cellTop, currentCellWidth, CELL_HEIGHT);
 
                 g.setColor(Color.BLACK);
@@ -122,38 +122,37 @@ public class KeyboardUI extends JPanel {
         }
     }
     /**
-     * tell Java to paint new rows with updated color data
-     * @param colors the color data array we get after correctness check
+     * tell Java to paint keys with updated color data
+     * @param colors the color data array we get after any correctness check
      * @param row
      */
-    public void updateRowColors(Color[] colors, int row) { 
-        for (int i =0; i< COLS; i++) { 
-            cellColors[row][i] = colors[i];
-        }
-        repaint();
-    }
-    /**
-     * tell Java to paint the existing rows in the given color mode
-     */
-    public void updateKeyColorMode() { 
-        for (int r = 0; r<ROWS; r ++) {
-            for (int c =0; c<COLS; c++) {
-                Color currColorStatus = cellColors[r][c];    
-                if (currColorStatus.equals(Game.GREEN)) {
-                    cellColors[r][c] = Game.ORANGE;
-                }
-                else if (currColorStatus.equals(Game.YELLOW)){
-                    cellColors[r][c] = Game.LIGHT_BLUE;
-                }                
-                else if (currColorStatus.equals(Game.LIGHT_BLUE)){
-                    cellColors[r][c] = Game.YELLOW;
-                }
-                else if (currColorStatus.equals(Game.ORANGE)) {
-                    cellColors[r][c] = Game.GREEN;
+    public void updateRowColors(String key, Color color) { 
+        for (int r = 0; r<ROWS; r++) { 
+            for (int c = 0; c< KEYS[r].length; c++) {
+                String currKey = cellKeys[r][c];
+                Color currKeyColor = cellColors[r][c];
+                if (currKey.equals(key)) {
+                    //not update if letter is already correct
+                    if (currKeyColor.equals(Game.getCorrectColor())) {
+                        return;
+                    }
+                    if (currKeyColor.equals(Game.getPresentColor())) {
+                        if (color.equals(Game.getCorrectColor())){
+                            currKeyColor = Game.getCorrectColor();
+                            return;
+                        }
+                        return;
+                    }
+                    //if current color is neither correct nor present just update with the given color
+                    currKeyColor = color;
+                    repaint();
+                    return;
+                    }
+                    
                 }
             }
         }
-        repaint();
-    }
+    
+
 
 }

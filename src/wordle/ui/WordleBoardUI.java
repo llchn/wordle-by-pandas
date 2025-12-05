@@ -117,7 +117,7 @@ public class WordleBoardUI extends JComponent {
         repaint();
     }
     /**
-     * tell Java to paint new rows with updated color data
+     * tell Java to paint one new row with updated color data
      * @param colors the color data array we get after correctness check
      * @param row
      */
@@ -128,7 +128,7 @@ public class WordleBoardUI extends JComponent {
         repaint();
     }
     /**
-     * tell Java to paint the existing rows in the given color mode
+     * tell Java to paint the previous rows in the given color mode
      */
     public void updateRowColorMode() { 
         for (int r = 0; r<ROWS; r ++) {
