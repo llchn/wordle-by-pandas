@@ -70,7 +70,6 @@ public class MainBoard extends JPanel {
         //pop-up messages based on input responses 
         textInputBox.addActionListener(event-> {
             String userGuess = getUserInput().toLowerCase();
-            Color[] resultColor = Game.getColorsForInput(userGuess, targetWord);
             if (getUserInput().length()<5) {
                 JOptionPane.showMessageDialog(f, "Too short!");
                 return; 
@@ -83,6 +82,7 @@ public class MainBoard extends JPanel {
                 JOptionPane.showMessageDialog(f, "Not in word list.");
                 return; 
             }
+            Color[] resultColor = Game.getColorsForInput(userGuess, targetWord);
             if (attemptsMade<5) {
                 //update colors for the grid's relevant row
                 grid.updateRowLetters(userGuess, attemptsMade);
@@ -96,6 +96,11 @@ public class MainBoard extends JPanel {
 
                 if (userGuess.equals(targetWord)) {
                     JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
+                    //update colors for keyboard
+                    for (int i=0; i<5; i++) {
+                        String letterToColor = String.valueOf(userGuess.charAt(i)).toUpperCase();
+                        keyboard.updateKeyColors(letterToColor, resultColor[i]);
+                    }
                     // no longer accept user input
                     textInputBox.setEnabled(false);
                     return;
@@ -107,11 +112,21 @@ public class MainBoard extends JPanel {
                     grid.updateRowLetters(userGuess, attemptsMade);
                     grid.updateRowColors(resultColor, attemptsMade);
                     JOptionPane.showMessageDialog(f, "Game over. Correct word: " + targetWord);
+                    //update colors for keyboard
+                    for (int i=0; i<5; i++) {
+                        String letterToColor = String.valueOf(userGuess.charAt(i)).toUpperCase();
+                        keyboard.updateKeyColors(letterToColor, resultColor[i]);
+                    }
                 }
                 else {
                     grid.updateRowLetters(userGuess, attemptsMade);
                     grid.updateRowColors(resultColor, attemptsMade);
                     JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
+                    //update colors for keyboard
+                    for (int i=0; i<5; i++) {
+                        String letterToColor = String.valueOf(userGuess.charAt(i)).toUpperCase();
+                        keyboard.updateKeyColors(letterToColor, resultColor[i]);
+                    }
                 }
                 // no longer accept user input
                 textInputBox.setEnabled(false);
