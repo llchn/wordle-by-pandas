@@ -157,4 +157,26 @@ public class KeyboardUI extends JPanel {
             }
         }
     }
+    /**
+     * tell Java to update existing colored keys with the new mode's colors
+     */
+    public void updateKeyColorMode() {
+        for (int r = 0; r<ROWS; r++) {
+            for (int c=0; c<KEYS[r].length; c++) {
+                Color currColorStatus = cellColors[r][c];    
+                if (currColorStatus.equals(Game.GREEN)) {
+                    cellColors[r][c] = Game.ORANGE;
+                }
+                else if (currColorStatus.equals(Game.YELLOW)){
+                    cellColors[r][c] = Game.LIGHT_BLUE;
+                }                
+                else if (currColorStatus.equals(Game.LIGHT_BLUE)){
+                    cellColors[r][c] = Game.YELLOW;
+                }
+                else if (currColorStatus.equals(Game.ORANGE)) {
+                    cellColors[r][c] = Game.GREEN;
+                }
+            }
+        }
+    }
 }

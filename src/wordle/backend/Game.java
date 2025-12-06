@@ -26,12 +26,6 @@ public class Game {
     public static final Color ORANGE = new Color(255, 130, 5);
     public static final Color LIGHT_BLUE = new Color(0, 134, 255);
 
-//    // HashMap to store letters for userGuess and corresponding color in grid
-//    private static HashMap<Character, Color> gridMap = new HashMap<>(5);
-//
-//    // HashMap to store letters on keyboard and corresponding color
-//    private static HashMap<Character, Color> keyboardMap = new HashMap<>(26);
-
 
     /**
      * Switches to a high contrast mode for accessibility

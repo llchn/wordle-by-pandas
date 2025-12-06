@@ -139,6 +139,7 @@ public class MainBoard extends JPanel {
             String modeSelected = viewModeBox.getSelectedItem().toString();
             setViewMode(modeSelected);
             grid.updateRowColorMode();
+            keyboard.updateKeyColorMode();
         });
 
         
