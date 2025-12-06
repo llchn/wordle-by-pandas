@@ -176,6 +176,7 @@ public class KeyboardUI extends JPanel {
                 else if (currColorStatus.equals(Game.ORANGE)) {
                     cellColors[r][c] = Game.GREEN;
                 }
+                repaint();
             }
         }
     }
