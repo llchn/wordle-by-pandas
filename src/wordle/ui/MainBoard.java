@@ -95,12 +95,13 @@ public class MainBoard extends JPanel {
                 }
 
                 if (userGuess.equals(targetWord)) {
-                    JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
                     //update colors for keyboard
                     for (int i=0; i<5; i++) {
                         String letterToColor = String.valueOf(userGuess.charAt(i)).toUpperCase();
                         keyboard.updateKeyColors(letterToColor, resultColor[i]);
                     }
+                    JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
+
                     // no longer accept user input
                     textInputBox.setEnabled(false);
                     return;
@@ -121,12 +122,13 @@ public class MainBoard extends JPanel {
                 else {
                     grid.updateRowLetters(userGuess, attemptsMade);
                     grid.updateRowColors(resultColor, attemptsMade);
-                    JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
                     //update colors for keyboard
                     for (int i=0; i<5; i++) {
                         String letterToColor = String.valueOf(userGuess.charAt(i)).toUpperCase();
                         keyboard.updateKeyColors(letterToColor, resultColor[i]);
                     }
+                    JOptionPane.showMessageDialog(f, "You got it! Correct word: " + targetWord);
+
                 }
                 // no longer accept user input
                 textInputBox.setEnabled(false);
