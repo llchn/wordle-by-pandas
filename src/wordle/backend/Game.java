@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 
+ * Sets up the color check logic for each user's guess and enables default/contrast
+ * mode switch
  * 
  * @author Felicia Nemoto-Pace 
- * Sources used: previous programming assignments,
+ * Sources used: previous programming assignments
  * 
  */
 public class Game {
@@ -26,50 +27,56 @@ public class Game {
     public static final Color ORANGE = new Color(255, 130, 5);
     public static final Color LIGHT_BLUE = new Color(0, 134, 255);
 
-
     /**
      * Switches to a high contrast mode for accessibility
-     * @param clicked 
+     * 
+     * @param clicked the current on/off state of contrast view mode
      */
     public static void setContrastMode(boolean clicked) {
         isContrastMode = clicked;
     }
-    
+
     /**
-     * @return
+     * Get the "correct" color based on the chosen view mode
+     * 
+     * @return the "correct" color based on the chosen view mode
      */
-    public static Color getCorrectColor() { 
-        if (isContrastMode) { 
-            return ORANGE; 
-            
-        } else { 
+    public static Color getCorrectColor() {
+        if (isContrastMode) {
+            return ORANGE;
+
+        } else {
             return GREEN;
         }
     }
-    
+
     /**
-     * @return
+     * Get the "present" color based on the chosen view mode
+     * 
+     * @return the "present" color based on the chosen view mode
      */
-    public static Color getPresentColor() { 
-        if (isContrastMode) { 
-            return LIGHT_BLUE; 
-        } else { 
+    public static Color getPresentColor() {
+        if (isContrastMode) {
+            return LIGHT_BLUE;
+        } else {
             return YELLOW;
         }
     }
-    
+
     /**
-     * @return
+     * Get the "absent" color based on the chosen view mode
+     * 
+     * @return color gray since the "absent" color doensn't differ between modes
      */
-    public static Color getAbsentColor() { 
+    public static Color getAbsentColor() {
         return GRAY;
     }
-
 
     /**
      * check and update colors for each guess made by user
      * 
-     * @param inputGuess
+     * @param inputGuess the user's guess
+     * @param targetWord the correct word
      */
     public static Color[] getColorsForInput(String inputGuess,
             String targetWord) {

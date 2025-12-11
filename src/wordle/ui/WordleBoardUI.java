@@ -11,144 +11,153 @@ import javax.swing.JComponent;
 import backend.Game;
 
 /**
- * displays the grid containing six 5-letter word guesses
+ * Displays the grid containing six 5-letter word guesses
  * 
- * @author Lily Tran 
+ * @author Lily Tran
  * 
- * Sources used: 
- * Java8 Oracle docs relating to Swing Graphics
- * https://docs.oracle.com/javase/8/docs/api/javax/swing/JLabel.html
- * https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html
- * https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
+ *         Sources used: Java8 Oracle docs relating to Swing Graphics
+ *         https://docs.oracle.com/javase/8/docs/api/javax/swing/JLabel.html
+ *         https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html
+ *         https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
  * 
- * Computer graphics facts relating to x-y coordinates https://math.hws.edu/eck/cs124/
- * javanotes5/c6/s3.html#:~:text=A%20graphics%20context%20draws%20in,the%20grid%20lines
- * %20between%20them.)
+ *         Computer graphics facts relating to x-y coordinates
+ *         https://math.hws.edu/eck/cs124/
+ *         javanotes5/c6/s3.html#:~:text=A%20graphics%20context%20draws%20in,the%20grid%20lines
+ *         %20between%20them.)
  */
 
-public class WordleBoardUI extends JComponent { 
+public class WordleBoardUI extends JComponent {
     // size information used in drawing the wordle board, in pixels
-    private static final int CELL_LEFT = 25; //int x 
+    private static final int CELL_LEFT = 25; // int x
     private static final int CELL_TOP = 50; // int y
     private static final int CELL_SIZE = 50;
     private static final int CELL_GAP = 4;
-    private static final int ROWS = 6; 
+    private static final int ROWS = 6;
     private static final int COLS = 5;
-    
-    private static final int GRID_WIDTH = (COLS * CELL_SIZE) + ((COLS - 1) * CELL_GAP);
-    private static final int GRID_HEIGHT = (ROWS * CELL_SIZE) + ((ROWS - 1) * CELL_GAP);
-    
+
+    private static final int GRID_WIDTH = (COLS * CELL_SIZE)
+            + ((COLS - 1) * CELL_GAP);
+    private static final int GRID_HEIGHT = (ROWS * CELL_SIZE)
+            + ((ROWS - 1) * CELL_GAP);
+
     private static final int COMPONENT_WIDTH = CELL_LEFT * 2 + GRID_WIDTH;
     private static final int COMPONENT_HEIGHT = CELL_TOP + GRID_HEIGHT;
 
     // start points for drawing boxes
-    private static final int START_LEFT = (COMPONENT_WIDTH - GRID_WIDTH)/2;
-    private static final int START_TOP = (COMPONENT_HEIGHT - GRID_HEIGHT)/2;  
-    
+    private static final int START_LEFT = (COMPONENT_WIDTH - GRID_WIDTH) / 2;
+    private static final int START_TOP = (COMPONENT_HEIGHT - GRID_HEIGHT) / 2;
+
     // where to store data
     private char[][] cellLetters;
     private Color[][] cellColors;
-    
-    //default color for each cell
-    private static final Color DEFAULT_COLOR = new Color(207,226,243);
-    
+
+    // default color for each cell
+    private static final Color DEFAULT_COLOR = new Color(207, 226, 243);
+
     /**
-     * Constructor 
+     * Constructor
      */
     public WordleBoardUI() {
         // data info of what's inside each box (letter, specific colors)
         cellLetters = new char[ROWS][COLS];
         cellColors = new Color[ROWS][COLS];
-        
-        //default data 
-        for (int r = 0; r < ROWS; r++) { 
+
+        // default data
+        for (int r = 0; r < ROWS; r++) {
             for (int c = 0; c < COLS; c++) {
-                cellLetters[r][c] = ' '; 
-                cellColors[r][c] = DEFAULT_COLOR;  
+                cellLetters[r][c] = ' ';
+                cellColors[r][c] = DEFAULT_COLOR;
             }
         }
-        this.setPreferredSize(new Dimension(COMPONENT_WIDTH, COMPONENT_HEIGHT));          
+        this.setPreferredSize(new Dimension(COMPONENT_WIDTH, COMPONENT_HEIGHT));
     }
-    
+
     // default cell color (baby blue)
     private static final Color CELL_COLOR = new Color(221, 240, 240);
-    
+
     /**
      * Draws 30 cells of the grid
+     * 
      * @param g the graphics object to draw on
      */
-    public void paintComponent (Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-        //repeatedly creating cells by using offset
-        for (int r=0; r<ROWS;r++) {
-            for (int c=0; c<COLS; c++) {
+
+        // repeatedly creating cells by using offset
+        for (int r = 0; r < ROWS; r++) {
+            for (int c = 0; c < COLS; c++) {
                 int leftMargin = START_LEFT + (c * (CELL_SIZE + CELL_GAP));
                 int topMargin = START_TOP + (r * (CELL_SIZE + CELL_GAP));
-                
-                //drawing the box first to avoid contradicting colors (cell's vs letter's colors)
+
+                // drawing the box first to avoid contradicting colors (cell's
+                // vs letter's colors)
                 g.setColor(cellColors[r][c]);
                 g.fillRect(leftMargin, topMargin, CELL_SIZE, CELL_SIZE);
-                if (cellLetters[r][c]!=' ') {
-                    
-                    g.setFont(new Font("Helvetica", Font.BOLD, 25));   
+                if (cellLetters[r][c] != ' ') {
+
+                    g.setFont(new Font("Helvetica", Font.BOLD, 25));
                     g.setColor(Color.white);
-                    
-                    //get specifics metrics of each letter in order to scale it exactly in the middle of box
-                    FontMetrics metrics = g.getFontMetrics(); 
-                    int letterWdth = metrics.stringWidth(String.valueOf(cellLetters[r][c]));
-                    int letterHgt = metrics.getHeight(); 
-                    int widthOffset = (CELL_SIZE - letterWdth)/2;
-                    int hgtOffset = (CELL_SIZE-letterHgt)/2 + letterHgt; 
-                    g.drawString(String.valueOf(cellLetters[r][c]), leftMargin + widthOffset, topMargin+hgtOffset); 
-                }               
+
+                    // get specifics metrics of each letter in order to scale it
+                    // exactly in the middle of box
+                    FontMetrics metrics = g.getFontMetrics();
+                    int letterWdth = metrics
+                            .stringWidth(String.valueOf(cellLetters[r][c]));
+                    int letterHgt = metrics.getHeight();
+                    int widthOffset = (CELL_SIZE - letterWdth) / 2;
+                    int hgtOffset = (CELL_SIZE - letterHgt) / 2 + letterHgt;
+                    g.drawString(String.valueOf(cellLetters[r][c]),
+                            leftMargin + widthOffset, topMargin + hgtOffset);
+                }
             }
-        }     
+        }
     }
+
     /**
      * tell Java to redraw after updating word data for a row
-     * @param word
-     * @param row
+     * 
+     * @param word the user's guess
+     * @param row  the row index we want to update the colors of
      */
     public void updateRowLetters(String word, int row) {
-        for (int i = 0; i<COLS; i++) {
+        for (int i = 0; i < COLS; i++) {
             cellLetters[row][i] = Character.toUpperCase(word.charAt(i));
         }
         repaint();
     }
+
     /**
      * tell Java to paint one new row with updated color data
+     * 
      * @param colors the color data array we get after correctness check
-     * @param row
+     * @param row    the row index we want to update the colors of
      */
-    public void updateRowColors(Color[] colors, int row) { 
-        for (int i =0; i< COLS; i++) { 
+    public void updateRowColors(Color[] colors, int row) {
+        for (int i = 0; i < COLS; i++) {
             cellColors[row][i] = colors[i];
         }
         repaint();
     }
+
     /**
      * tell Java to paint the previous rows in the given color mode
      */
-    public void updateRowColorMode() { 
-        for (int r = 0; r<ROWS; r ++) {
-            for (int c =0; c<COLS; c++) {
-                Color currColorStatus = cellColors[r][c];    
+    public void updateRowColorMode() {
+        for (int r = 0; r < ROWS; r++) {
+            for (int c = 0; c < COLS; c++) {
+                Color currColorStatus = cellColors[r][c];
                 if (currColorStatus.equals(Game.GREEN)) {
                     cellColors[r][c] = Game.ORANGE;
-                }
-                else if (currColorStatus.equals(Game.YELLOW)){
+                } else if (currColorStatus.equals(Game.YELLOW)) {
                     cellColors[r][c] = Game.LIGHT_BLUE;
-                }                
-                else if (currColorStatus.equals(Game.LIGHT_BLUE)){
+                } else if (currColorStatus.equals(Game.LIGHT_BLUE)) {
                     cellColors[r][c] = Game.YELLOW;
-                }
-                else if (currColorStatus.equals(Game.ORANGE)) {
+                } else if (currColorStatus.equals(Game.ORANGE)) {
                     cellColors[r][c] = Game.GREEN;
                 }
             }
         }
         repaint();
     }
-    
+
 }

@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 class GameTest {
+    // colors for default mode
     public static final Color GREEN = new Color(98, 183, 61);
     public static final Color YELLOW = new Color(200, 182, 83);
     public static final Color GRAY = new Color(120, 124, 127);
@@ -15,7 +16,7 @@ class GameTest {
     // colors for high contrast mode
     public static final Color ORANGE = new Color(255, 130, 5);
     public static final Color LIGHT_BLUE = new Color(0, 134, 255);
-    
+
     @Test
     void contrastButtonClicked() {
         Game.setContrastMode(true);
@@ -26,7 +27,7 @@ class GameTest {
         assertEquals(colorOutput[3], LIGHT_BLUE);
         assertEquals(colorOutput[4], LIGHT_BLUE);
     }
-    
+
     @Test
     void allLettersIncorrect() {
         Game.setContrastMode(false);
@@ -46,7 +47,7 @@ class GameTest {
         assertEquals(colorOutput[3], GRAY);
         assertEquals(colorOutput[4], YELLOW);
     }
-    
+
     @Test
     void mixGreenAndGray() {
         Game.setContrastMode(false);
@@ -68,7 +69,7 @@ class GameTest {
         assertEquals(colorOutput[3], YELLOW);
         assertEquals(colorOutput[4], YELLOW);
     }
-    
+
     @Test
     void mixAllColors() {
         Game.setContrastMode(false);
