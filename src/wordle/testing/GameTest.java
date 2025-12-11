@@ -1,4 +1,4 @@
-package backend;
+package testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+import backend.*;
 
 class GameTest {
     // colors for default mode
@@ -89,5 +90,7 @@ class GameTest {
             assertEquals(color, GREEN);
         }
     }
+    
+    
 
 }
