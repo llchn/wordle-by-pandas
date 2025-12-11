@@ -14,11 +14,10 @@ import javax.swing.JOptionPane;
 /**
  * Displays the whole Wordle game
  * 
- * Sources: Java Swing dialog boxes
- * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html Java
- * Swing combo boxes
- * https://docs.oracle.com/javase/8/docs/api/javax/swing/JComboBox.html
- * Cryptography programming assignment
+ * Sources: 
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html (Java Swing dialog boxes)
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JComboBox.html (Java Swing combo boxes)
+ * Past programming assignments, given drawing examples
  * 
  * @author Lily Tran
  * 

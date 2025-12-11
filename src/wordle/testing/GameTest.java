@@ -3,11 +3,16 @@ package testing;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 import backend.*;
 
+/**
+ * Test the Game class methods
+ * 
+ * @author Felicia Nemoto-Pace, Linda Hu, Lily Tran 
+ * 
+ * Source: Past programming assignments
+ */
 class GameTest {
     // colors for default mode
     public static final Color GREEN = new Color(98, 183, 61);
@@ -90,7 +95,25 @@ class GameTest {
             assertEquals(color, GREEN);
         }
     }
-    
-    
 
+    @Test
+    void duplicateLetters() {
+        Game.setContrastMode(false);
+        Color[] colorOutput = Game.getColorsForInput("abbey", "babes");
+        assertEquals(Game.YELLOW, colorOutput[0]);
+        assertEquals(Game.YELLOW, colorOutput[1]);
+        assertEquals(Game.GREEN, colorOutput[2]);
+        assertEquals(Game.GREEN, colorOutput[3]);
+        assertEquals(Game.GRAY, colorOutput[4]);
+    }
+
+    @Test
+    void excessDuplicateLetters() {
+        Color[] colorOutput = Game.getColorsForInput("ghost", "ttttt");
+        assertEquals(Game.GRAY, colorOutput[0]);
+        assertEquals(Game.GRAY, colorOutput[1]);
+        assertEquals(Game.GRAY, colorOutput[2]);
+        assertEquals(Game.GRAY, colorOutput[3]);
+        assertEquals(Game.GREEN, colorOutput[4]);
+    }
 }
