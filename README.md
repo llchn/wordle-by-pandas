@@ -1,4 +1,4 @@
-### Wordle Desktop Game
+# Wordle Desktop Game
 A desktop implementation of the popular word-guessing game Wordle, built from scratch using Java and the Swing GUI toolkit.
 
 ## Overview
