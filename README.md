@@ -18,5 +18,5 @@ As the team lead and UI designer, my main focus areas included:
 ## Demo video
 [![Wordle Accessibility Demo](https://img.youtube.com/vi/SYD-3Y1pNDM/0.jpg)](https://www.youtube.com/watch?v=SYD-3Y1pNDM)
 
-## Team tributes!
-Developed collaboratively with Felicia Nemoto-Pace and Linda Hu.
+## Team
+Collaborators: Felicia Nemoto-Pace and Linda Hu.
